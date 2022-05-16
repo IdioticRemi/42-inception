@@ -11,9 +11,10 @@ GRY 		=	\033[0;90m
 RST 		=	\033[0m
 
 all: print_header
-	mkdir -p /home/tjolivea/data
-	mkdir -p /home/tjolivea/data/wordpress
-	mkdir -p /home/tjolivea/data/mariadb
+	sudo mkdir -p /home/tjolivea
+	sudo mkdir -p /home/tjolivea/data
+	sudo mkdir -p /home/tjolivea/data/wordpress
+	sudo mkdir -p /home/tjolivea/data/mariadb
 	cp ./srcs/.env ./srcs/requirements/mariadb/conf/
 	cp ./srcs/.env ./srcs/requirements/nginx/conf/
 	cp ./srcs/.env ./srcs/requirements/wordpress/conf/
@@ -43,8 +44,7 @@ clean:
 	docker rmi -f srcs_nginx
 
 fclean:	clean
-	sudo rm -rf /home/tjolivea/data/wordpress
-	sudo rm -rf /home/tjolivea/data/mariadb
+	sudo rm -rf /home/tjolivea/data
 	docker system prune --force --all
 
 re : fclean all

@@ -2,7 +2,7 @@ BBLU 		=	\033[1;34m
 BGREEN		=	\033[1;32m
 BRED		=	\033[1;31m
 BLU 		=	\033[0;34m
-MGT			=	\033[0;35m
+MGT		=	\033[0;35m
 LMGT		=	\033[0;95m
 LBLU 		=	\033[0;96m
 GRN 		=	\033[0;32m
@@ -11,10 +11,9 @@ GRY 		=	\033[0;90m
 RST 		=	\033[0m
 
 all: print_header
-	sudo mkdir -p /home/tjolivea
-	sudo mkdir -p /home/tjolivea/data
-	sudo mkdir -p /home/tjolivea/data/wordpress
-	sudo mkdir -p /home/tjolivea/data/mariadb
+	mkdir -p /home/tjolivea/data
+	mkdir -p /home/tjolivea/data/wordpress
+	mkdir -p /home/tjolivea/data/mariadb
 	cp ./srcs/.env ./srcs/requirements/mariadb/conf/
 	cp ./srcs/.env ./srcs/requirements/nginx/conf/
 	cp ./srcs/.env ./srcs/requirements/wordpress/conf/
@@ -45,6 +44,7 @@ clean:
 
 fclean:	clean
 	sudo rm -rf /home/tjolivea/data
+	docker volume rm $(docker volume ls -q) || echo "Volumes were already clean."
 	docker system prune --force --all
 
 re : fclean all
